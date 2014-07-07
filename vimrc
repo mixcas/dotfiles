@@ -124,8 +124,8 @@ set tm=500
 " Enable syntax highlighting
 syntax enable
 
-colorscheme ir_black
-set background=dark
+colorscheme neon
+" set background=dark
 
 " Set extra options when running in GUI mode
 if has("gui_running")
