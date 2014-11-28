@@ -124,7 +124,7 @@ set tm=500
 " Enable syntax highlighting
 syntax enable
 
-colorscheme neon
+colorscheme solarized
 " set background=dark
 
 " Set extra options when running in GUI mode
@@ -142,7 +142,8 @@ set encoding=utf8
 set ffs=unix,dos,mac
 
 au BufNewFile,BufRead *.ejs set filetype=js
-au BufNewFile,BufRead *.ejs set filetype=html
+au bufnewfile,bufread *.ejs set filetype=html
+au bufnewfile,bufread *.styl set filetype=styl
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -171,7 +172,7 @@ set tw=500
 
 set ai "Auto indent
 set si "Smart indent
-set wrap "Wrap lines
+" set wrap "Wrap lines
 
 
 """"""""""""""""""""""""""""""
@@ -349,7 +350,21 @@ function! <SID>BufcloseCloseIt()
    endif
 endfunction
 
-let g:user_emmet_expandabbr_key = '<tab>'
 
 " Pathogen
 execute pathogen#infect()
+
+" NERDTree
+map <C-n> :NERDTreeToggle<CR>
+
+" Custom Maps
+" ZX = :w
+nmap ZX :w<CR>
+
+" Ctrl + [hjkl] to move around splits
+map <C-J> <C-W>j
+map <C-K> <C-W>k
+
+" Emmet 
+let g:user_emmet_leader_key = '<c-s>'
+imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
