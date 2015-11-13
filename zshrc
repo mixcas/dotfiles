@@ -82,3 +82,6 @@ export PATH=$PATH:$GOPATH/bin
 
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
+
+# Github alias
+eval "$(hub alias -s)"

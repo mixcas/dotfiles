@@ -38,9 +38,61 @@
 "    -> Helper functions
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => NeoBundle
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" NeoBundle Scripts-----------------------------
+if has('vim_starting')
+  if &compatible
+    set nocompatible               " Be iMproved
+  endif
+
+  " Required:
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
+
+" Required:
+call neobundle#begin(expand('/Users/cas/.vim/bundle'))
+
+" Let NeoBundle manage NeoBundle
+" Required:
+NeoBundleFetch 'Shougo/neobundle.vim'
+
+" Add or remove your Bundles here:
+NeoBundle 'Shougo/neosnippet.vim'
+NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'ctrlpvim/ctrlp.vim'
+NeoBundle 'flazz/vim-colorschemes'
+
+NeoBundle 'ervandew/supertab'
+NeoBundle 'scrooloose/syntastic'
+NeoBundle 'majutsushi/tagbar'
+NeoBundle 'bling/vim-airline'
+NeoBundle 'hail2u/vim-css3-syntax'
+NeoBundle 'fatih/vim-go'
+NeoBundle 'wavded/vim-stylus'
+NeoBundle 'tpope/vim-surround'
+NeoBundle 'Shougo/vimshell'
+
+" You can specify revision/branch/tag.
+" NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
+
+" Required:
+call neobundle#end()
+
+" Required:
+filetype plugin indent on
+
+" If there are uninstalled bundles found on startup,
+" this will conveniently prompt you to install them.
+NeoBundleCheck
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 " Sets how many lines of history VIM has to remember
 set history=1000
 
@@ -59,7 +111,6 @@ let g:mapleader = ","
 " Fast saving
 nmap <leader>w :w!<cr>
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -70,7 +121,7 @@ set so=7
 set wildmenu
 
 " Set Wild Menu to list
-set wildmode=list,full
+set wildmode=list:longest,full
 
 " Ignore compiled files
 set wildignore=*.o,*~,*.pyc
@@ -79,7 +130,7 @@ set wildignore=*.o,*~,*.pyc
 set ruler
 
 " Height of the command bar
-" set cmdheight=2
+set cmdheight=1
 
 " A buffer becomes hidden when it is abandoned
 set hid
@@ -122,18 +173,19 @@ set tm=500
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Enable syntax highlighting
-syntax enable
+syntax on
 
-colorscheme solarized
+colorscheme Dracula
+
 " set background=dark
 
 " Set extra options when running in GUI mode
-if has("gui_running")
-    set guioptions-=T
-    set guioptions+=e
+" if has("gui_running")
+    " set guioptions-=T
+    " set guioptions+=e
     set t_Co=256
-    set guitablabel=%M\ %t
-endif
+    " set guitablabel=%M\ %t
+" endif
 
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
@@ -162,18 +214,17 @@ set expandtab
 " Be smart when using tabs ;)
 set smarttab
 
-" 1 tab == 4 spaces
+" 1 tab == 2 spaces
 set shiftwidth=2
 set tabstop=2
 
 " Linebreak on 500 characters
-set lbr
-set tw=500
+" set lbr
+" set tw=500
 
 set ai "Auto indent
 set si "Smart indent
 " set wrap "Wrap lines
-
 
 """"""""""""""""""""""""""""""
 " => Visual mode related
@@ -191,10 +242,6 @@ vnoremap <silent> # :call VisualSelection('b')<CR>
 " map j gj
 " map k gk
 
-" Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
-map <space> /
-map <c-space> ?
-
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>
 
@@ -209,16 +256,6 @@ map <leader>bd :Bclose<cr>
 
 " Close all the buffers
 map <leader>ba :1,1000 bd!<cr>
-
-" Useful mappings for managing tabs
-map <leader>tn :tabnew<cr>
-map <leader>to :tabonly<cr>
-map <leader>tc :tabclose<cr>
-map <leader>tm :tabmove
-
-" Opens a new tab with the current buffer's path
-" Super useful when editing files in the same directory
-map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
@@ -351,9 +388,6 @@ function! <SID>BufcloseCloseIt()
 endfunction
 
 
-" Pathogen
-execute pathogen#infect()
-
 " NERDTree
 map <C-n> :NERDTreeToggle<CR>
 
@@ -368,3 +402,19 @@ map <C-K> <C-W>k
 " Emmet 
 let g:user_emmet_leader_key = '<c-s>'
 imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
+
+" Tagbar
+nmap <F8> :TagbarToggle<CR>
+
+" indentLine
+let g:indentLine_color_term = 255
+let g:indentLine_char = 'c'
+let g:indentLine_color_gui = '#A4E57E'
+let g:indentLine_color_dark = 1
+let g:indentLine_color_tty_light = 7
+
+" Tern
+let g:tern_map_keys=1
+let g:tern_show_argument_hints='on_hold'
+
+let g:airline_powerline_fonts = 1
