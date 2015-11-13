@@ -60,21 +60,24 @@ call neobundle#begin(expand('/Users/cas/.vim/bundle'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 
 " Add or remove your Bundles here:
+NeoBundle 'ervandew/supertab'
 NeoBundle 'Shougo/neosnippet.vim'
 NeoBundle 'Shougo/neosnippet-snippets'
+
+" Utilities
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'ctrlpvim/ctrlp.vim'
-NeoBundle 'flazz/vim-colorschemes'
-
-NeoBundle 'ervandew/supertab'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'majutsushi/tagbar'
 NeoBundle 'bling/vim-airline'
+NeoBundle 'tpope/vim-surround'
+
+" Syntax and autocomplete
+NeoBundle 'flazz/vim-colorschemes'
+NeoBundle 'wavded/vim-stylus'
 NeoBundle 'hail2u/vim-css3-syntax'
 NeoBundle 'fatih/vim-go'
-NeoBundle 'wavded/vim-stylus'
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'Shougo/vimshell'
+NeoBundle 'othree/html5.vim'
 
 " You can specify revision/branch/tag.
 " NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
@@ -95,10 +98,6 @@ NeoBundleCheck
 
 " Sets how many lines of history VIM has to remember
 set history=1000
-
-" Enable filetype plugins
-filetype plugin on
-filetype indent on
 
 " Set to auto read when a file is changed from the outside
 set autoread
@@ -175,7 +174,7 @@ set tm=500
 " Enable syntax highlighting
 syntax on
 
-colorscheme Dracula
+" colorscheme Dracula
 
 " set background=dark
 
@@ -195,7 +194,7 @@ set ffs=unix,dos,mac
 
 au BufNewFile,BufRead *.ejs set filetype=js
 au bufnewfile,bufread *.ejs set filetype=html
-au bufnewfile,bufread *.styl set filetype=styl
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -387,7 +386,6 @@ function! <SID>BufcloseCloseIt()
    endif
 endfunction
 
-
 " NERDTree
 map <C-n> :NERDTreeToggle<CR>
 
@@ -399,10 +397,6 @@ nmap ZX :w<CR>
 map <C-J> <C-W>j
 map <C-K> <C-W>k
 
-" Emmet 
-let g:user_emmet_leader_key = '<c-s>'
-imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
-
 " Tagbar
 nmap <F8> :TagbarToggle<CR>
 
@@ -413,8 +407,28 @@ let g:indentLine_color_gui = '#A4E57E'
 let g:indentLine_color_dark = 1
 let g:indentLine_color_tty_light = 7
 
-" Tern
-let g:tern_map_keys=1
-let g:tern_show_argument_hints='on_hold'
-
+" Airline
 let g:airline_powerline_fonts = 1
+" Hide encoding
+let g:airline_section_y = ''
+
+" NeoSnippets
+" Plugin key-mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" For conceal markers.
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
+
+" Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
