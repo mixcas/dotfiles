@@ -91,6 +91,8 @@ alias nginx='sudo nginx'
 export PATH="$(brew --prefix josegonzalez/php/php54)/bin:$PATH"
 #export PATH="/sbin:/usr/local/bin:/usr/local/sbin:~/bin:$PATH"
 export PATH="/usr/local/share/npm/bin:$PATH"
+export PATH="$HOME/.node/bin:$PATH"
+
 
 export NODE_PATH="/usr/local/lib/node"
 
