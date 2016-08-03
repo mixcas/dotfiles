@@ -40,57 +40,50 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => NeoBundle
+" => Vundle
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" NeoBundle Scripts-----------------------------
-if has('vim_starting')
-  if &compatible
-    set nocompatible               " Be iMproved
-  endif
+set nocompatible              " be iMproved, required
+filetype off                  " required
 
-  " Required:
-  set runtimepath+=~/.vim/bundle/neobundle.vim/
-endif
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
 
-" Required:
-call neobundle#begin(expand('/Users/cas/.vim/bundle'))
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
 
-" Let NeoBundle manage NeoBundle
-" Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
-
-" Add or remove your Bundles here:
-NeoBundle 'ervandew/supertab'
-NeoBundle 'Shougo/neosnippet.vim'
-NeoBundle 'Shougo/neosnippet-snippets'
+" Plugins
+Plugin 'ervandew/supertab'
+Plugin 'Shougo/neosnippet.vim'
+Plugin 'Shougo/neosnippet-snippets'
 
 " Utilities
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'ctrlpvim/ctrlp.vim'
-NeoBundle 'scrooloose/syntastic'
-NeoBundle 'majutsushi/tagbar'
-NeoBundle 'bling/vim-airline'
-NeoBundle 'tpope/vim-surround'
+Plugin 'tpope/vim-fugitive'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'scrooloose/syntastic'
+Plugin 'majutsushi/tagbar'
+Plugin 'bling/vim-airline'
+Plugin 'tpope/vim-surround'
 
 " Syntax and autocomplete
-NeoBundle 'flazz/vim-colorschemes'
-NeoBundle 'wavded/vim-stylus'
-NeoBundle 'hail2u/vim-css3-syntax'
-NeoBundle 'fatih/vim-go'
-NeoBundle 'othree/html5.vim'
+Plugin 'flazz/vim-colorschemes'
+Plugin 'othree/html5.vim'
+Plugin 'wavded/vim-stylus'
+Plugin 'hail2u/vim-css3-syntax'
+Plugin 'fatih/vim-go'
+Plugin 'pangloss/vim-javascript'
+Plugin 'StanAngeloff/php.vim'
+Plugin 'mxw/vim-jsx'
 
-" You can specify revision/branch/tag.
-" NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
+" Colors
+Plugin 'freeo/vim-kalisi'
 
-" Required:
-call neobundle#end()
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
 
-" Required:
-filetype plugin indent on
-
-" If there are uninstalled bundles found on startup,
-" this will conveniently prompt you to install them.
-NeoBundleCheck
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
@@ -174,9 +167,8 @@ set tm=500
 " Enable syntax highlighting
 syntax on
 
+" colorscheme
 " colorscheme Dracula
-
-" set background=dark
 
 " Set extra options when running in GUI mode
 " if has("gui_running")
@@ -218,12 +210,12 @@ set shiftwidth=2
 set tabstop=2
 
 " Linebreak on 500 characters
-" set lbr
-" set tw=500
+set lbr
+set tw=500
 
 set ai "Auto indent
 set si "Smart indent
-" set wrap "Wrap lines
+set wrap "Wrap lines
 
 """"""""""""""""""""""""""""""
 " => Visual mode related
@@ -326,6 +318,9 @@ map <leader>q :e ~/buffer<cr>
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr>
 
+" Better pasting with ,p
+map <Leader>p :set paste<CR>o<esc>"*]p:set nopaste<cr>
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -386,7 +381,14 @@ function! <SID>BufcloseCloseIt()
    endif
 endfunction
 
-" NERDTree
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugins Config
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""" Ctrlp
+" Ignore files
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+
+"""""" NERDTree
 map <C-n> :NERDTreeToggle<CR>
 
 " Custom Maps
@@ -397,33 +399,28 @@ nmap ZX :w<CR>
 map <C-J> <C-W>j
 map <C-K> <C-W>k
 
-" Tagbar
+"""""" Tagbar
 nmap <F8> :TagbarToggle<CR>
 
-" indentLine
-let g:indentLine_color_term = 255
-let g:indentLine_char = 'c'
-let g:indentLine_color_gui = '#A4E57E'
-let g:indentLine_color_dark = 1
-let g:indentLine_color_tty_light = 7
-
-" Airline
+"""""" Airline
 let g:airline_powerline_fonts = 1
+" let g:airline_theme='kalisi'
+
 " Hide encoding
 let g:airline_section_y = ''
 
-" NeoSnippets
+"""""" NeoSnippets
 " Plugin key-mappings.
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
 
 " For conceal markers.
-if has('conceal')
-  set conceallevel=2 concealcursor=niv
-endif
+"if has('conceal')
+"  set conceallevel=2 concealcursor=niv
+"endif
 
-" Syntastic
+"""""" Syntastic
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
@@ -432,3 +429,6 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
+" Disable for html
+let syntastic_mode_map = { 'passive_filetypes': ['html'] }

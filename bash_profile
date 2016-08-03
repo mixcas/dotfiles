@@ -106,4 +106,3 @@ export PATH=/usr/local/bin:$PATH
 export PATH=$PATH:$GOPATH/bin:$PATH
 
 export GOPATH='/Users/cas/go'
-

@@ -1,17 +1,23 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
+# Save history
+export PROMPT_COMMAND='if [ "$(id -u)" -ne 0 ]; then echo "$(date "+%Y-%m-%d.%H:%M:%S") $(pwd) $(history 1)" >> ~/.logs/bash-history-$(date "+%Y-%m-%d").log; fi'
+
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="minimal"
+ZSH_THEME="sunrise"
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-# alias vim="mvim"
-# alias svim="sudo mvim"
+alias vup="cd /Volumes/Stuff/Proyectos/interglobal_vision/mamp && vagrant up"
+alias vhalt="cd /Volumes/Stuff/Proyectos/interglobal_vision/mamp && vagrant halt"
+
+alias lynx="lynx --vikeys"
+
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
@@ -49,7 +55,7 @@ ZSH_THEME="minimal"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git bower npm vagrant tmux tmuxinator composer)
+plugins=(git bower brew emoji-clock compleat meteor npm vagrant web-search wp-cli z websearch lol)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -58,14 +64,18 @@ export GOPATH=$HOME/go
 export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/opt/X11/lib/pkgconfig
 
 # Android path
-export ANDROID_HOME=/Users/editorial12/Dev/android-sdk-macosx_x86
+export ANDROID_HOME=~/Library/Android/sdk
 
-export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin"
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/plataform-tools  # Add Android SDK to PATH for scripting
+# npm path
+export NPM_PATH=/usr/local/bin
 
-export PATH=$PATH:$GOPATH/bin
-# export MANPATH="/usr/local/man:$MANPATH"
+export PATH="/Users/cas/.rvm/gems/ruby-2.1.0/bin:/Users/cas/.rvm/gems/ruby-2.1.0@global/bin:/Users/cas/.rvm/rubies/ruby-2.1.0/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/go/bin:/Users/cas/.rvm/bin:$PATH"
+export PATH="/usr/local/bin/node:/usr/local/bin/npm:$PATH"
+export PATH="ANDROID_HOME/tools:ANDROID_HOME/platform-tools:$PATH"
+export PATH=$PATH:$GOPATH/bin 
+export PATH=$PATH:$NPM_PATH/bin 
+
+#export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -82,6 +92,13 @@ export PATH=$PATH:$GOPATH/bin
 
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
+if [ -e /usr/share/terminfo/x/xterm-256color ]; then
+  export TERM='xterm-256color'
+else
+  export TERM='xterm-color'
+fi
 
-# Github alias
-eval "$(hub alias -s)"
+# Z
+. `brew --prefix`/etc/profile.d/z.sh
+
+source /Users/cas/.iterm2_shell_integration.zsh
