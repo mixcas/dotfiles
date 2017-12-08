@@ -1,12 +1,12 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Maintainer: 
+" Maintainer:
 "       Amir Salihefendic
 "       http://amix.dk - amix@amix.dk
 "
-" Version: 
+" Version:
 "       5.0 - 29/05/12 15:43:36
 "
-" Blog_post: 
+" Blog_post:
 "       http://amix.dk/blog/post/19691#The-ultimate-Vim-configuration-on-Github
 "
 " Awesome_version:
@@ -19,7 +19,7 @@
 " Syntax_highlighted:
 "       http://amix.dk/vim/vimrc.html
 "
-" Raw_version: 
+" Raw_version:
 "       http://amix.dk/vim/vimrc.txt
 "
 " Sections:
@@ -62,8 +62,8 @@ Plugin 'Shougo/neosnippet-snippets'
 " Utilities
 Plugin 'tpope/vim-fugitive'
 Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'scrooloose/syntastic'
 Plugin 'majutsushi/tagbar'
+Plugin 'marijnh/tern_for_vim'
 Plugin 'bling/vim-airline'
 Plugin 'tpope/vim-surround'
 
@@ -72,13 +72,20 @@ Plugin 'flazz/vim-colorschemes'
 Plugin 'othree/html5.vim'
 Plugin 'wavded/vim-stylus'
 Plugin 'hail2u/vim-css3-syntax'
-Plugin 'fatih/vim-go'
 Plugin 'pangloss/vim-javascript'
 Plugin 'StanAngeloff/php.vim'
 Plugin 'mxw/vim-jsx'
 
+" Snipmate
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
+
+Plugin 'isRuslan/vim-es6'
+
 " Colors
 Plugin 'freeo/vim-kalisi'
+Plugin 'dracula/vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -134,7 +141,7 @@ set whichwrap+=<,>,h,l
 " Ignore case when searching
 set ignorecase
 
-" When searching try to be smart about cases 
+" When searching try to be smart about cases
 set smartcase
 
 " Highlight search results
@@ -168,7 +175,7 @@ set tm=500
 syntax on
 
 " colorscheme
-" colorscheme Dracula
+color dracula
 
 " Set extra options when running in GUI mode
 " if has("gui_running")
@@ -183,9 +190,6 @@ set encoding=utf8
 
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
-
-au BufNewFile,BufRead *.ejs set filetype=js
-au bufnewfile,bufread *.ejs set filetype=html
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
@@ -251,7 +255,7 @@ map <leader>ba :1,1000 bd!<cr>
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
-" Specify the behavior when switching between buffers 
+" Specify the behavior when switching between buffers
 try
   set switchbuf=useopen,usetab,newtab
   set stal=2
@@ -304,6 +308,7 @@ func! DeleteTrailingWS()
 endfunc
 autocmd BufWrite *.py :call DeleteTrailingWS()
 autocmd BufWrite *.coffee :call DeleteTrailingWS()
+autocmd BufWritePre * %s/\s\+$//e
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -388,9 +393,6 @@ endfunction
 " Ignore files
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 
-"""""" NERDTree
-map <C-n> :NERDTreeToggle<CR>
-
 " Custom Maps
 " ZX = :w
 nmap ZX :w<CR>
@@ -400,6 +402,7 @@ map <C-J> <C-W>j
 map <C-K> <C-W>k
 
 """""" Tagbar
+"" let g:tagbar_ctags_bin='/usr/bin/ctags'
 nmap <F8> :TagbarToggle<CR>
 
 """""" Airline
@@ -421,9 +424,9 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 "endif
 
 """""" Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
