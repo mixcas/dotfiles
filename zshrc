@@ -13,10 +13,14 @@ ZSH_THEME="sunrise"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias vup="cd /Volumes/Stuff/Proyectos/interglobal_vision/mamp && vagrant up"
-alias vhalt="cd /Volumes/Stuff/Proyectos/interglobal_vision/mamp && vagrant halt"
 
 alias lynx="lynx --vikeys"
+
+alias meteorsettings="meteor --settings settings.json"
+alias meteortest="meteor --settings settings.json test --driver-package dispatch:mocha-browser"
+alias scDownload="python /Volumes/Stuff/Proyectos/cas/SoundCloud/download.py --track"
+alias startPostgres="pg_ctl -D /usr/local/var/postgres start"
+alias stopPostgres="pg_ctl -D /usr/local/var/postgres stop"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -60,20 +64,35 @@ plugins=(git bower brew emoji-clock compleat meteor npm vagrant web-search wp-cl
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-export GOPATH=$HOME/go
-export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/opt/X11/lib/pkgconfig
+export GOPATH=/Volumes/Stuff/Proyectos/goWork
+# export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/opt/X11/lib/pkgconfig
+
+
+# Yarn path
+export PATH="$PATH:$HOME/.yarn/bin"
 
 # Android path
-export ANDROID_HOME=~/Library/Android/sdk
+# export ANDROID_HOME=~/Library/Android/sdk
 
 # npm path
-export NPM_PATH=/usr/local/bin
+# export NPM_PATH=/usr/local/bin/node
 
-export PATH="/Users/cas/.rvm/gems/ruby-2.1.0/bin:/Users/cas/.rvm/gems/ruby-2.1.0@global/bin:/Users/cas/.rvm/rubies/ruby-2.1.0/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/go/bin:/Users/cas/.rvm/bin:$PATH"
-export PATH="/usr/local/bin/node:/usr/local/bin/npm:$PATH"
-export PATH="ANDROID_HOME/tools:ANDROID_HOME/platform-tools:$PATH"
-export PATH=$PATH:$GOPATH/bin 
-export PATH=$PATH:$NPM_PATH/bin 
+export PATH="/usr/local/sbin:$PATH"
+# export PATH="/Users/cas/.rvm/gems/ruby-2.1.0/bin:/Users/cas/.rvm/gems/ruby-2.1.0@global/bin:/Users/cas/.rvm/rubies/ruby-2.1.0/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/go/bin:/Users/cas/.rvm/bin:$PATH"
+# export PATH="/usr/local/bin/node:/usr/local/bin/npm:$PATH"
+# export PATH="ANDROID_HOME/tools:ANDROID_HOME/platform-tools:$PATH"
+
+# Golang
+export PATH=$PATH:$GOPATH/bin
+
+# Java, used for Android dev
+export JAVA_HOME=$(/usr/libexec/java_home)
+
+# Android
+export ANDROID_HOME=/Development/android-sdk/
+export PATH=${PATH}:/Development/android-sdk/platform-tools:/Development/android-sdk/tools
+
+# export PATH=$PATH:$NPM_PATH/bin
 
 #export MANPATH="/usr/local/man:$MANPATH"
 
