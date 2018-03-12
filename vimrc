@@ -56,9 +56,6 @@ Plugin 'VundleVim/Vundle.vim'
 
 " Plugins
 Plugin 'ervandew/supertab'
-Plugin 'Shougo/neosnippet.vim'
-Plugin 'Shougo/neosnippet-snippets'
-
 " Utilities
 Plugin 'tpope/vim-fugitive'
 Plugin 'ctrlpvim/ctrlp.vim'
@@ -75,11 +72,6 @@ Plugin 'hail2u/vim-css3-syntax'
 Plugin 'pangloss/vim-javascript'
 Plugin 'StanAngeloff/php.vim'
 Plugin 'mxw/vim-jsx'
-
-" Snipmate
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-Plugin 'garbas/vim-snipmate'
 
 Plugin 'isRuslan/vim-es6'
 
@@ -411,12 +403,6 @@ let g:airline_powerline_fonts = 1
 
 " Hide encoding
 let g:airline_section_y = ''
-
-"""""" NeoSnippets
-" Plugin key-mappings.
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
 
 " For conceal markers.
 "if has('conceal')

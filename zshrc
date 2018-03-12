@@ -59,7 +59,21 @@ alias stopPostgres="pg_ctl -D /usr/local/var/postgres stop"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git bower brew emoji-clock compleat meteor npm vagrant web-search wp-cli z websearch lol)
+plugins=(
+  git
+  bower
+  brew
+  emoji-clock
+  compleat
+  meteor
+  npm
+  vagrant
+  web-search
+  wp-cli
+  z
+  websearch
+  lol
+  )
 
 source $ZSH/oh-my-zsh.sh
 
@@ -72,27 +86,19 @@ export GOPATH=/Volumes/Stuff/Proyectos/goWork
 export PATH="$PATH:$HOME/.yarn/bin"
 
 # Android path
-# export ANDROID_HOME=~/Library/Android/sdk
+export ANDROID_HOME=~/Library/Android/sdk
+export PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
 
 # npm path
 # export NPM_PATH=/usr/local/bin/node
 
 export PATH="/usr/local/sbin:$PATH"
-# export PATH="/Users/cas/.rvm/gems/ruby-2.1.0/bin:/Users/cas/.rvm/gems/ruby-2.1.0@global/bin:/Users/cas/.rvm/rubies/ruby-2.1.0/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/go/bin:/Users/cas/.rvm/bin:$PATH"
-# export PATH="/usr/local/bin/node:/usr/local/bin/npm:$PATH"
-# export PATH="ANDROID_HOME/tools:ANDROID_HOME/platform-tools:$PATH"
 
 # Golang
-export PATH=$PATH:$GOPATH/bin
+#export PATH=$PATH:$GOPATH/bin
 
 # Java, used for Android dev
-export JAVA_HOME=$(/usr/libexec/java_home)
-
-# Android
-export ANDROID_HOME=/Development/android-sdk/
-export PATH=${PATH}:/Development/android-sdk/platform-tools:/Development/android-sdk/tools
-
-# export PATH=$PATH:$NPM_PATH/bin
+# export JAVA_HOME=$(/usr/libexec/java_home)
 
 #export MANPATH="/usr/local/man:$MANPATH"
 
