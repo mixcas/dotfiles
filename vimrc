@@ -56,26 +56,30 @@ Plugin 'VundleVim/Vundle.vim'
 
 " Plugins
 Plugin 'ervandew/supertab'
-" Utilities
+"" Utilities
 Plugin 'tpope/vim-fugitive'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'mileszs/ack.vim'
 Plugin 'scrooloose/nerdcommenter'
-" Plugin 'marijnh/tern_for_vim'
 Plugin 'bling/vim-airline'
 Plugin 'tpope/vim-surround'
+Plugin 'eshion/vim-sync'
 
-" Syntax and autocomplete
+"" Syntax and autocomplete
 Plugin 'flazz/vim-colorschemes'
 Plugin 'othree/html5.vim'
 Plugin 'wavded/vim-stylus'
 Plugin 'hail2u/vim-css3-syntax'
-Plugin 'pangloss/vim-javascript'
+Plugin 'jparise/vim-graphql'
+" Plugin 'pangloss/vim-javascript'
 Plugin 'StanAngeloff/php.vim'
-Plugin 'mxw/vim-jsx'
+" Plugin 'mxw/vim-jsx'
+Plugin 'chemzqm/vim-jsx-improve'
 Plugin 'justinj/vim-react-snippets'
 Plugin 'joukevandermaas/vim-ember-hbs'
+Plugin 'w0rp/ale'
+Plugin 'leafgarland/typescript-vim'
 
 if has('nvim')
   Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -85,15 +89,12 @@ else
   Plugin 'roxma/vim-hug-neovim-rpc'
 endif
 
-
-" Linting
-Plugin 'vim-syntastic/syntastic'
-
+"" Linting
 Plugin 'isRuslan/vim-es6'
 
 " Colors
-Plugin 'freeo/vim-kalisi'
-Plugin 'dracula/vim'
+" Plugin 'freeo/vim-kalisi'
+" Plugin 'dracula/vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -183,7 +184,8 @@ set tm=500
 syntax on
 
 " colorscheme
-color dracula
+" color dracula
+" color kalisi
 
 " Set extra options when running in GUI mode
 " if has("gui_running")
@@ -425,20 +427,11 @@ let g:airline_section_y = ''
 "  set conceallevel=2 concealcursor=niv
 "endif
 
-"""""" Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_javascript_checkers = ['eslint']
-
-" Disable for html
-let syntastic_mode_map = { 'passive_filetypes': ['html'] }
-
 """""" Deoplete
 let g:deoplete#enable_at_startup = 1
 
+" ALE config
+nmap <silent> [c <Plug>(ale_previous_wrap)
+nmap <silent> ]c <Plug>(ale_next_wrap)
+let g:ale_sign_error = '❌'
+let g:ale_sign_warning = '⚠️'
