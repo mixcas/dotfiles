@@ -1,5 +1,6 @@
 # Path to your oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
+# export ZSH=$HOME/.oh-my-zsh
+export ZSH=/usr/share/oh-my-zsh
 
 # Save history
 export PROMPT_COMMAND='if [ "$(id -u)" -ne 0 ]; then echo "$(date "+%Y-%m-%d.%H:%M:%S") $(pwd) $(history 1)" >> ~/.logs/bash-history-$(date "+%Y-%m-%d").log; fi'
@@ -22,14 +23,55 @@ alias stopPostgres="pg_ctl -D /usr/local/var/postgres stop"
 alias youtube480="youtube-dl --no-check-certificate -f '(mp4)[height<480]'"
 alias vim="nvim"
 
+
+# activate virtual environment from any directory from current and up
+DEFAULT_VENV_NAME=.venv
+DEFAULT_PYTHON_VERSION="3"
+
+# Simple function to create virtual environmnents
+function pve() {
+  if [ $# -eq 0 ]; then
+    local VENV_NAME="$DEFAULT_VENV_NAME"
+  else
+    local VENV_NAME="$1"
+  fi
+  if [ ! -d "$VENV_NAME" ]; then
+    echo "Creating new Python virtualenv in $VENV_NAME/"
+    python$DEFAULT_PYTHON_VERSION -m venv "$VENV_NAME"
+    source "$VENV_NAME/bin/activate"
+    va
+  else
+    va
+  fi
+}
+
+function va() {
+  if [ $# -eq 0 ]; then
+    local VENV_NAME=$DEFAULT_VENV_NAME
+  else
+    local VENV_NAME="$1"
+  fi
+  local slashes=${PWD//[^\/]/}
+  local DIR="$PWD"
+  for (( n=${#slashes}; n>0; --n ))
+  do
+    if [ -d "$DIR/$VENV_NAME" ]; then
+      source "$DIR/$VENV_NAME/bin/activate"
+      return
+    fi
+    local DIR="$DIR/.."
+  done
+  echo "no $VENV_NAME/ found from here to OS root"
+}
+
 # FUCK
-eval $(thefuck --alias)
+# eval $(thefuck --alias)
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=13
@@ -64,18 +106,11 @@ eval $(thefuck --alias)
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(
   git
-  bower
-  brew
-  emoji-clock
   compleat
-  meteor
-  npm
-  vagrant
-  web-search
   wp-cli
   z
-  websearch
   lol
+  nvm
   )
 
 source $ZSH/oh-my-zsh.sh
@@ -85,11 +120,16 @@ source $ZSH/oh-my-zsh.sh
 
 
 # Yarn path
-export PATH="$PATH:$HOME/.yarn/bin"
+# export PATH="$PATH:$HOME/.yarn/bin"
+export PATH="$PATH:/usr/bin/yarn"
 
 # Android path
-export ANDROID_HOME=/Volumes/Stuff/Dev/Android/sdk
-export PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
+# export ANDROID_HOME=/Volumes/Stuff/Dev/Android/sdk
+# export PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
+export ANDROID_SDK=/home/cas/Android/Sdk
+export ANDROID_HOME=/home/cas/Android/Sdk
+export ANDROID_SDK_ROOT=/home/cas/Android/Sdk/platform-tools
+export PATH=${PATH}:${ANDROID_SDK}
 
 # npm path
 # export NPM_PATH=/usr/local/bin/node
@@ -106,8 +146,11 @@ export PATH="$PATH:$HOME/.composer/vendor/bin"
 # fastlane
 export PATH="$HOME/.fastlane/bin:$PATH"
 
+# fastlane
+export PATH="/home/cas/.local/bin:$PATH"
+
 # Java, used for Android dev
-export JAVA_HOME=$(/usr/libexec/java_home)
+# export JAVA_HOME=$(/usr/libexec/java_home)
 
 #export MANPATH="/usr/local/man:$MANPATH"
 
@@ -135,16 +178,16 @@ else
 fi
 
 # Z
-. `brew --prefix`/etc/profile.d/z.sh
+# . `brew --prefix`/etc/profile.d/z.sh
 
-source /Users/cas/.iterm2_shell_integration.zsh
+# source /Users/cas/.iterm2_shell_integration.zsh
 
 # Init nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+#export NVM_DIR="$HOME/.nvm"
+#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+#[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# Check for .nvmrc to call autamtically version of node
+## Check for .nvmrc to call autamtically version of node
 autoload -U add-zsh-hook
 load-nvmrc() {
   local node_version="$(nvm version)"
@@ -163,13 +206,41 @@ load-nvmrc() {
     nvm use default
   fi
 }
+
 add-zsh-hook chpwd load-nvmrc
 load-nvmrc
 
+export REACT_EDITOR=nvim
+#source /usr/share/nvm/init-nvm.sh
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
+
+function pyenv_install() {
+  if [ $# -ne 1 ]; then
+    echo "pyenv_install <version_name>"
+    return 1
+  fi
+
+  LDFLAGS="-L/usr/lib/openssl-1.0" \
+    CFLAGS="-I/usr/include/openssl-1.0" \
+    pyenv install -v $1
+  }
+
+export PATH=${PATH}:'/home/cas/Dev/google_appengine_'
+
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/cas/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/cas/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f '/home/cas/Dev/google-cloud-sdk/path.zsh.inc' ]; then . '/home/cas/Dev/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/cas/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/cas/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f '/home/cas/Dev/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/cas/Dev/google-cloud-sdk/completion.zsh.inc'; fi
 
-export REACT_EDITOR=nvim
+# PBCOPY
+alias pbcopy='xclip -selection clipboard'
+alias pbpaste='xclip -selection clipboard -o'
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/home/cas/.sdkman"
+[[ -s "/home/cas/.sdkman/bin/sdkman-init.sh" ]] && source "/home/cas/.sdkman/bin/sdkman-init.sh"
