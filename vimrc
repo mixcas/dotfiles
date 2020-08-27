@@ -58,13 +58,14 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'ervandew/supertab'
 "" Utilities
 Plugin 'tpope/vim-fugitive'
-Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'kien/ctrlp.vim'
 Plugin 'majutsushi/tagbar'
+Plugin 'hushicai/tagbar-javascript.vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'bling/vim-airline'
 Plugin 'tpope/vim-surround'
-Plugin 'eshion/vim-sync'
+Plugin 'ludovicchabant/vim-gutentags'
 
 "" Syntax and autocomplete
 Plugin 'flazz/vim-colorschemes'
@@ -78,7 +79,6 @@ Plugin 'StanAngeloff/php.vim'
 Plugin 'chemzqm/vim-jsx-improve'
 Plugin 'justinj/vim-react-snippets'
 Plugin 'joukevandermaas/vim-ember-hbs'
-Plugin 'w0rp/ale'
 Plugin 'leafgarland/typescript-vim'
 
 if has('nvim')
@@ -91,10 +91,11 @@ endif
 
 "" Linting
 Plugin 'isRuslan/vim-es6'
+Plugin 'w0rp/ale'
 
 " Colors
 " Plugin 'freeo/vim-kalisi'
-" Plugin 'dracula/vim'
+Plugin 'dracula/vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -118,6 +119,8 @@ let g:mapleader = ","
 
 " Fast saving
 nmap <leader>w :w!<cr>
+
+set wildignorecase
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
@@ -230,6 +233,10 @@ set tw=500
 set ai "Auto indent
 set si "Smart indent
 set wrap "Wrap lines
+
+" 1 space after comment
+let g:NERDSpaceDelims = 1
+
 
 """"""""""""""""""""""""""""""
 " => Visual mode related
@@ -435,3 +442,8 @@ nmap <silent> [c <Plug>(ale_previous_wrap)
 nmap <silent> ]c <Plug>(ale_next_wrap)
 let g:ale_sign_error = '❌'
 let g:ale_sign_warning = '⚠️'
+let g:ale_set_highlights = 0
+
+""""" Gutentags
+let g:gutentags_cache_dir = '.git/tags'
+

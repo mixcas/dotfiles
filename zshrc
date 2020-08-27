@@ -1,6 +1,6 @@
 # Path to your oh-my-zsh installation.
 # export ZSH=$HOME/.oh-my-zsh
-export ZSH=/usr/share/oh-my-zsh
+export ZSH="/home/csolares/.oh-my-zsh"
 
 # Save history
 export PROMPT_COMMAND='if [ "$(id -u)" -ne 0 ]; then echo "$(date "+%Y-%m-%d.%H:%M:%S") $(pwd) $(history 1)" >> ~/.logs/bash-history-$(date "+%Y-%m-%d").log; fi'
@@ -211,36 +211,15 @@ add-zsh-hook chpwd load-nvmrc
 load-nvmrc
 
 export REACT_EDITOR=nvim
-#source /usr/share/nvm/init-nvm.sh
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi
-
-function pyenv_install() {
-  if [ $# -ne 1 ]; then
-    echo "pyenv_install <version_name>"
-    return 1
-  fi
-
-  LDFLAGS="-L/usr/lib/openssl-1.0" \
-    CFLAGS="-I/usr/include/openssl-1.0" \
-    pyenv install -v $1
-  }
-
+source /usr/share/nvm/init-nvm.sh
 export PATH=${PATH}:'/home/cas/Dev/google_appengine_'
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/cas/Dev/google-cloud-sdk/path.zsh.inc' ]; then . '/home/cas/Dev/google-cloud-sdk/path.zsh.inc'; fi
+# if [ -f '/home/cas/Dev/google-cloud-sdk/path.zsh.inc' ]; then . '/home/cas/Dev/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/home/cas/Dev/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/cas/Dev/google-cloud-sdk/completion.zsh.inc'; fi
+# if [ -f '/home/cas/Dev/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/cas/Dev/google-cloud-sdk/completion.zsh.inc'; fi
 
 # PBCOPY
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/home/cas/.sdkman"
-[[ -s "/home/cas/.sdkman/bin/sdkman-init.sh" ]] && source "/home/cas/.sdkman/bin/sdkman-init.sh"
