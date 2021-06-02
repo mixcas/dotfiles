@@ -40,66 +40,59 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Vundle
+" => vim=plug
+" https://github.com/junegunn/vim-plug
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set nocompatible              " be iMproved, required
-filetype off                  " required
+" Specify a directory for plugins
+" " - For Neovim: stdpath('data') . '/plugged'
+" " - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-
-" Plugins
-Plugin 'ervandew/supertab'
+" Plugs
+Plug 'ervandew/supertab'
 "" Utilities
-Plugin 'tpope/vim-fugitive'
-Plugin 'kien/ctrlp.vim'
-Plugin 'majutsushi/tagbar'
-Plugin 'hushicai/tagbar-javascript.vim'
-Plugin 'mileszs/ack.vim'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'bling/vim-airline'
-Plugin 'tpope/vim-surround'
-Plugin 'ludovicchabant/vim-gutentags'
+Plug 'tpope/vim-fugitive'
+Plug 'kien/ctrlp.vim'
+Plug 'majutsushi/tagbar'
+Plug 'hushicai/tagbar-javascript.vim'
+Plug 'mileszs/ack.vim'
+Plug 'scrooloose/nerdcommenter'
+Plug 'bling/vim-airline'
+Plug 'tpope/vim-surround'
+Plug 'ludovicchabant/vim-gutentags'
 
 "" Syntax and autocomplete
-Plugin 'flazz/vim-colorschemes'
-Plugin 'othree/html5.vim'
-Plugin 'wavded/vim-stylus'
-Plugin 'hail2u/vim-css3-syntax'
-Plugin 'jparise/vim-graphql'
-" Plugin 'pangloss/vim-javascript'
-Plugin 'StanAngeloff/php.vim'
-" Plugin 'mxw/vim-jsx'
-Plugin 'chemzqm/vim-jsx-improve'
-Plugin 'justinj/vim-react-snippets'
-Plugin 'joukevandermaas/vim-ember-hbs'
-Plugin 'leafgarland/typescript-vim'
+Plug 'flazz/vim-colorschemes'
+Plug 'othree/html5.vim'
+Plug 'wavded/vim-stylus'
+Plug 'hail2u/vim-css3-syntax'
+Plug 'jparise/vim-graphql'
+" Plug 'pangloss/vim-javascript'
+Plug 'StanAngeloff/php.vim'
+" Plug 'mxw/vim-jsx'
+Plug 'chemzqm/vim-jsx-improve'
+Plug 'justinj/vim-react-snippets'
+Plug 'joukevandermaas/vim-ember-hbs'
+Plug 'leafgarland/typescript-vim'
 
 if has('nvim')
-  Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugs' }
 else
-  Plugin 'Shougo/deoplete.nvim'
-  Plugin 'roxma/nvim-yarp'
-  Plugin 'roxma/vim-hug-neovim-rpc'
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
 endif
 
 "" Linting
-Plugin 'isRuslan/vim-es6'
-Plugin 'w0rp/ale'
+Plug 'isRuslan/vim-es6'
+Plug 'w0rp/ale'
 
 " Colors
-" Plugin 'freeo/vim-kalisi'
-Plugin 'dracula/vim'
+" Plug 'freeo/vim-kalisi'
+Plug 'dracula/vim'
 
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
+call plug#end()             " required
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -440,9 +433,9 @@ let g:deoplete#enable_at_startup = 1
 " ALE config
 nmap <silent> [c <Plug>(ale_previous_wrap)
 nmap <silent> ]c <Plug>(ale_next_wrap)
-let g:ale_sign_error = '❌'
-let g:ale_sign_warning = '⚠️'
-let g:ale_set_highlights = 0
+" let g:ale_sign_error = '❌'
+" let g:ale_sign_warning = '⚠️'
+" let g:ale_set_highlights = 0
 
 """"" Gutentags
 let g:gutentags_cache_dir = '.git/tags'
