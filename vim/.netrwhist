@@ -1,9 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =7
-let g:netrw_dirhist_1='/Users/cas/.hammerspoon'
-let g:netrw_dirhist_2='/Users/cas/.hammerspoon/Spoons'
-let g:netrw_dirhist_3='/Volumes/Stuff/Proyectos/interglobal_vision/new'
-let g:netrw_dirhist_4='/Volumes/Stuff/Proyectos/interglobal_vision/admin-andamiaje-co2/src/styl/fonts'
-let g:netrw_dirhist_5='/Volumes/Stuff/Proyectos/interglobal_vision/andamiaje2/node_modules/date-fns/locale/es/build_format_locale'
-let g:netrw_dirhist_6='/Volumes/Stuff/Proyectos/interglobal_vision/andamiaje2/node_modules/date-fns/distance_in_words_to_now'
-let g:netrw_dirhist_7='/Volumes/Stuff/Proyectos/interglobal_vision/andamiaje2'
