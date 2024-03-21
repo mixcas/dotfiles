@@ -1,0 +1,14 @@
+{
+  "Comment.nvim": { "branch": "master", "commit": "0236521ea582747b58869cb72f70ccfa967d2e89" },
+  "coc.nvim": { "branch": "release", "commit": "7b9e1ef0a1399907c51d23b6080b94a5aba4a654" },
+  "ctrlp.vim": { "branch": "master", "commit": "7c972cb19c8544c681ca345c64ec39e04f4651cc" },
+  "fzf": { "branch": "master", "commit": "3dd42f5aa2d7fc6f508f2b21408730a8678c0a19" },
+  "fzf.vim": { "branch": "master", "commit": "8ea9574b3ebdc44fbe3dc6381a13f9ce0c290e2f" },
+  "lazy.nvim": { "branch": "main", "commit": "aedcd79811d491b60d0a6577a9c1701063c2a609" },
+  "lualine.nvim": { "branch": "master", "commit": "7d131a8d3ba5016229e8a1d08bf8782acea98852" },
+  "nvim-treesitter": { "branch": "master", "commit": "18aa5ae3fd7245137bc41b5348102fe254405509" },
+  "nvim-web-devicons": { "branch": "master", "commit": "0bb67ef952ea3eb7b1bac9c011281471d99a27bc" },
+  "starry.nvim": { "branch": "master", "commit": "9d3c8db7a08088cb7e7b3fdb38a26f620e96abd8" },
+  "vim-fugitive": { "branch": "master", "commit": "2e88f14a585c014691904ba8fe39e6ea851c9422" },
+  "vim-surround": { "branch": "master", "commit": "3d188ed2113431cf8dac77be61b842acb64433d9" }
+}

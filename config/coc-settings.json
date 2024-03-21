@@ -1,0 +1,28 @@
+{
+  "languageserver": {
+    "tsserver": {
+      "enable": true
+    },
+    "css": {
+      "enable": true
+    },
+    "html": {
+      "enable": true
+    },
+    "json": {
+      "enable": true
+    },
+    "markdownlint": {
+      "enable": true
+    },
+    "phpls": {
+      "enable": true
+    },
+    "pyright": {
+      "enable": true
+    },
+    "eslint": {	
+      "enable": true
+    }
+  }
+}
