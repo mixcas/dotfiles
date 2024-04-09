@@ -23,55 +23,11 @@ alias stopPostgres="pg_ctl -D /usr/local/var/postgres stop"
 alias youtube480="youtube-dl --no-check-certificate -f '(mp4)[height<480]'"
 alias vim="nvim"
 
-
-# activate virtual environment from any directory from current and up
-DEFAULT_VENV_NAME=.venv
-DEFAULT_PYTHON_VERSION="3"
-
-# Simple function to create virtual environmnents
-function pve() {
-  if [ $# -eq 0 ]; then
-    local VENV_NAME="$DEFAULT_VENV_NAME"
-  else
-    local VENV_NAME="$1"
-  fi
-  if [ ! -d "$VENV_NAME" ]; then
-    echo "Creating new Python virtualenv in $VENV_NAME/"
-    python$DEFAULT_PYTHON_VERSION -m venv "$VENV_NAME"
-    source "$VENV_NAME/bin/activate"
-    va
-  else
-    va
-  fi
-}
-
-function va() {
-  if [ $# -eq 0 ]; then
-    local VENV_NAME=$DEFAULT_VENV_NAME
-  else
-    local VENV_NAME="$1"
-  fi
-  local slashes=${PWD//[^\/]/}
-  local DIR="$PWD"
-  for (( n=${#slashes}; n>0; --n ))
-  do
-    if [ -d "$DIR/$VENV_NAME" ]; then
-      source "$DIR/$VENV_NAME/bin/activate"
-      return
-    fi
-    local DIR="$DIR/.."
-  done
-  echo "no $VENV_NAME/ found from here to OS root"
-}
-
-# FUCK
-# eval $(thefuck --alias)
-
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
-DISABLE_AUTO_UPDATE="true"
+# DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=13
