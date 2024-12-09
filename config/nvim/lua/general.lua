@@ -14,3 +14,6 @@ vim.api.nvim_set_keymap("n","<leader>w",":w!<cr>",{})
 
 -- Ignore case when Neovim completes file names and directories
 vim.opt.wildignorecase = true
+
+-- Enable paste mode
+vim.opt.paste = true
