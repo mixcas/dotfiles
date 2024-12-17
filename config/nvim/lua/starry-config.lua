@@ -1,8 +1,9 @@
 local config = {
-  border = false, -- Split window borders
+  border = true, -- Split window borders
+  hide_eob = false, -- Hide end of buffer
   italics = {
-    comments = false, -- Italic comments
-    strings = false, -- Italic strings
+    comments = true, -- Italic comments
+    strings = true, -- Italic strings
     keywords = false, -- Italic keywords
     functions = false, -- Italic functions
     variables = false -- Italic variables
@@ -15,8 +16,8 @@ local config = {
   },
 
   text_contrast = {
-    lighter = false, -- Higher contrast text for lighter style
-    darker = false -- Higher contrast text for darker style
+    lighter = true, -- Higher contrast text for lighter style
+    darker = true -- Higher contrast text for darker style
   },
 
   disable = {
@@ -26,22 +27,23 @@ local config = {
   },
 
   style = {
-    name = 'moonlight', -- Theme style name (moonlight, earliestsummer, etc.)
+    name = 'deepocean', -- Theme style name (moonlight, earliestsummer, etc.)
     -- " other themes: dracula, oceanic, dracula_blood, 'deep ocean', darker, palenight, monokai, mariana, emerald, middlenight_blue
     disable = {},  -- a list of styles to disable, e.g. {'bold', 'underline'}
     fix = true,
     darker_contrast = false, -- More contrast for darker style
-    daylight_swith = false, -- Enable day and night style switching
+    daylight_swith = true, -- Enable day and night style switching
     deep_black = false, -- Enable a deeper black background
   },
 
-  custom_colors = {
-    variable = '#f797d7',
-  },
-  custom_highlights = {
-    LineNr = { fg = '#777777' },
-    Idnetifier = { fg = '#ff4797' },
-  }
+  -- custom_colors = {
+  --   variable = '#f797d7',
+  -- },
+  --
+  -- custom_highlights = {
+  --   LineNr = { fg = '#777777' },
+  --   Idnetifier = { fg = '#ff4797' },
+  -- }
 }
 require('starry').setup(config)
-vim.cmd('colorscheme oceanic')
+vim.cmd('colorscheme deepocean')
