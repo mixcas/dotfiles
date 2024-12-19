@@ -30,7 +30,7 @@ vim.opt.tabstop = 2
 vim.opt.ai = false -- Auto indent
 vim.opt.smartindent = false
 vim.opt.si = true -- Smart indent
-vim.opt.wrap = true -- Wrap lines
+vim.opt.wrap = false -- Wrap lines
 
 vim.opt.ignorecase = true
 
