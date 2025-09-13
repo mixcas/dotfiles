@@ -1,12 +1,33 @@
--- require("mason").setup();
---
--- require("mason-lspconfig").setup({});
---
--- local lspconfig = require('lspconfig')
--- lspconfig.tssserver.setup({});
-
+vim.lsp.config('tsserver', {
+  settings = {
+    typescript = {
+      inlayHints = {
+        includeInlayParameterNameHints = 'all',
+        includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+        includeInlayFunctionParameterTypeHints = true,
+        includeInlayVariableTypeHints = true,
+        includeInlayPropertyDeclarationTypeHints = true,
+        includeInlayFunctionLikeReturnTypeHints = true,
+        includeInlayEnumMemberValueHints = true
+      },
+      suggest = {
+        completeFunctionCalls = true,
+      }
+    },
+    javascript = {
+      inlayHints = {
+        includeInlayParameterNameHints = 'all',
+        includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+        includeInlayFunctionParameterTypeHints = true,
+        includeInlayVariableTypeHints = true,
+        includeInlayPropertyDeclarationTypeHints = true,
+        includeInlayFunctionLikeReturnTypeHints = true,
+      }
+    }
+  }
+})
 require("mason").setup()
-require("mason-lspconfig").setup({
+require("mason-lspconfig").setup {
   ensure_installed = {
     "ts_ls",
     "eslint",
@@ -15,48 +36,8 @@ require("mason-lspconfig").setup({
     "css_variables", 
     "cssmodules_ls",
     "html",
-    -- "nginx_language_server",
   },
   automatic_installation = true,
-})
-require("mason-lspconfig").setup_handlers {
-  -- The first entry (without a key) will be the default handler
-  -- and will be called for each installed server that doesn't have
-  -- a dedicated handler.
-  function (server_name) -- default handler (optional)
-    require("lspconfig")[server_name].setup {}
-  end,
-  -- TypeScript specific handler
-  ["tsserver"] = function()
-    require("lspconfig").tsserver.setup({
-      settings = {
-        typescript = {
-          inlayHints = {
-            includeInlayParameterNameHints = 'all',
-            includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-            includeInlayFunctionParameterTypeHints = true,
-            includeInlayVariableTypeHints = true,
-            includeInlayPropertyDeclarationTypeHints = true,
-            includeInlayFunctionLikeReturnTypeHints = true,
-            includeInlayEnumMemberValueHints = true
-          },
-          suggest = {
-            completeFunctionCalls = true,
-          }
-        },
-        javascript = {
-          inlayHints = {
-            includeInlayParameterNameHints = 'all',
-            includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-            includeInlayFunctionParameterTypeHints = true,
-            includeInlayVariableTypeHints = true,
-            includeInlayPropertyDeclarationTypeHints = true,
-            includeInlayFunctionLikeReturnTypeHints = true,
-          }
-        }
-      }
-    })
-  end,
 }
 
 require("formatter").setup()

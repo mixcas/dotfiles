@@ -2,17 +2,22 @@ local keyset = vim.keymap.set
 
 -- Setup Lazy, package manager:
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  })
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+  if vim.v.shell_error ~= 0 then
+    vim.api.nvim_echo({
+      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+      { out, "WarningMsg" },
+      { "\nPress any key to exit..." },
+    }, true, {})
+    vim.fn.getchar()
+    os.exit(1)
+  end
 end
 vim.opt.rtp:prepend(lazypath)
+
+require('general')
 
 -- Setup Plugins list
 require("lazy").setup({
@@ -79,6 +84,21 @@ require("lazy").setup({
       "nvim-tree/nvim-web-devicons",
     },
   }, {
+    "mason-org/mason-lspconfig.nvim",
+    opts = {},
+    dependencies = {
+      {
+        "mason-org/mason.nvim", 
+        opts = {},
+      }, {
+        "neovim/nvim-lspconfig",
+      },
+    },
+    config = function()
+    end
+  }, {
+    "mhartington/formatter.nvim"
+  }, {
     "neoclide/coc.nvim",
     branch = "release",
     build = "yarn install --frozen-lockfile",
@@ -126,14 +146,6 @@ require("lazy").setup({
         },
       })
     end
-  }, {
-    "williamboman/mason.nvim"
-  }, {
-    "williamboman/mason-lspconfig.nvim",
-  }, {
-    "neovim/nvim-lspconfig",
-  }, {
-    "mhartington/formatter.nvim"
   }
 })
 
@@ -333,3 +345,5 @@ keyset("n", "<space>j", ":<C-u>CocNext<cr>", opts)
 keyset("n", "<space>k", ":<C-u>CocPrev<cr>", opts)
 -- Resume latest coc list
 keyset("n", "<space>p", ":<C-u>CocListResume<cr>", opts)
+
+require('lsp-config')
