@@ -1,6 +1,4 @@
 require('plugins')
-require('lsp-config')
-require('general')
 require('vim-ui')
 require('moving')
 require('starry-config')
