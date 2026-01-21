@@ -32,6 +32,11 @@ require("lazy").setup({
       build = ":call fzf#install()" 
     },
   }, {
+    "alex-popov-tech/store.nvim",
+    dependencies = { "OXY2DEV/markview.nvim" },
+    opts = {},
+    cmd = "Store"
+  }, {
     "numToStr/Comment.nvim",
     config = function()
       require("Comment").setup()
@@ -105,7 +110,7 @@ require("lazy").setup({
     -- TODO: find a way to autoinstall coc pacakges
     -- :CocInstall coc-css coc-tsserver coc-html coc-json coc-markdownlint coc-phpls coc-pyright coc-eslint                                                                                                                                                                  }, {
   }, {
-    "nvim-treesitter/nvim-treesitter",
+    "nvim-treesitter/nvim-treesitter", -- Syntx Highlight
     build = ":TSUpdate",
     config = function()
       require("nvim-treesitter.configs").setup({
@@ -146,7 +151,43 @@ require("lazy").setup({
         },
       })
     end
-  }
+  }, {
+    "kdheepak/lazygit.nvim",
+    lazy = true,
+    cmd = {
+      "LazyGit",
+      "LazyGitConfig",
+      "LazyGitCurrentFile",
+      "LazyGitFilter",
+      "LazyGitFilterCurrentFile",
+    },
+    -- optional for floating window border decoration
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    -- setting the keybinding for LazyGit with 'keys' is recommended in
+    -- order to load the plugin when the command is run for the first time
+    keys = {
+      { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
+    }
+  -- }, {
+  --   "xTacobaco/cursor-agent.nvim",
+  --   config = function()
+  --     vim.keymap.set("n", "<leader>ca", ":CursorAgent<CR>", { desc = "Cursor Agent: Toggle terminal" })
+  --     vim.keymap.set("v", "<leader>ca", ":CursorAgentSelection<CR>", { desc = "Cursor Agent: Send selection" })
+  --     vim.keymap.set("n", "<leader>cA", ":CursorAgentBuffer<CR>", { desc = "Cursor Agent: Send buffer" })
+		-- end,
+	}, {
+		"Sarctiann/cursor-agent.nvim",
+		dependencies = {
+			"folke/snacks.nvim",
+		},
+		--- @type Cursor-Agent.Config
+		opts = {
+			use_default_mappings = true,
+			show_help_on_open = true,
+		},
+	}
 })
 
 ---> fzf
