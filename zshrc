@@ -1,6 +1,5 @@
 # Path to your oh-my-zsh installation.
-# export ZSH=$HOME/.oh-my-zsh
-export ZSH="/home/csolares/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Save history
 export PROMPT_COMMAND='if [ "$(id -u)" -ne 0 ]; then echo "$(date "+%Y-%m-%d.%H:%M:%S") $(pwd) $(history 1)" >> ~/.logs/bash-history-$(date "+%Y-%m-%d").log; fi'
@@ -69,7 +68,7 @@ plugins=(
   nvm
   )
 
-# source $ZSH/oh-my-zsh.sh
+source $ZSH/oh-my-zsh.sh
 
 # User configuration
 # export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/opt/X11/lib/pkgconfig
@@ -181,3 +180,15 @@ export PATH=${PATH}:'/home/cas/Dev/google_appengine_'
 # PBCOPY
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
+
+
+# bun completions
+[ -s "/home/cas/.bun/_bun" ] && source "/home/cas/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+. "$HOME/.atuin/bin/env"
+
+eval "$(atuin init zsh)"
